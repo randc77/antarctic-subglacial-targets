@@ -1,0 +1,70 @@
+# Lambert-Amery study region, EPSG:3031 (WGS 84 / Antarctic Polar Stereographic)
+#
+# Geographic extent: 60-80 deg E, 75 deg S to the coast (~66-69 deg S).
+# Projected bounds below are the bounding box of that geographic window,
+# computed with the standard polar-stereographic forward projection
+# (standard parallel -71, central meridian 0). The box is generous: a
+# lon/lat window is not a rectangle in polar stereographic, so clip with the
+# geographic mask too if you need the exact wedge.
+#
+# Covers the Amery Ice Shelf, Lambert Glacier, the northern and southern
+# Prince Charles Mountains, the Mawson Escarpment and the Grove Mountains.
+# Well north of the Landsat pole hole (~82.7 deg S), so coverage is complete.
+
+region:
+  name: lambert_amery
+  epsg: 3031
+  # projected bounds, metres
+  xmin: 1419000
+  xmax: 2605000
+  ymin: 284000
+  ymax: 1323000
+  # geographic window, for reference and for exact clipping
+  lon_min: 60.0
+  lon_max: 80.0
+  lat_min: -75.0
+  lat_max: -66.0
+
+# Landmarks, EPSG:3031 — useful for sanity-checking that scenes and rasters
+# land where you expect before trusting anything downstream.
+landmarks:
+  amery_front:            [2247083,  730121]
+  north_prince_charles:   [1953696,  869842]
+  south_prince_charles:   [1763449,  748540]
+  mawson_escarpment:      [1704186,  688536]
+  grove_mountains:        [1818275,  487205]
+
+extraction:
+  pixel_size_m: 30.0
+
+  # Texture window. 5 px = 150 m: large enough to register outcrop roughness,
+  # small enough not to smear across the rock/snow boundary.
+  texture_window_px: 5
+
+  # Pixels within this distance of a polygon edge are excluded from training
+  # and scoring. 60 m = 2 Landsat pixels either side.
+  edge_buffer_m: 60.0
+
+  # Scene-level quality gates.
+  min_valid_fraction: 0.35          # fraction surviving the QA mask
+  min_rock_pixels_per_scene: 2000
+
+  # Sampling. Rock is ~0.18% of Antarctica continent-wide and more common in
+  # this region, but still rare. 1:5 keeps the problem imbalanced-but-workable;
+  # the cap stops the Prince Charles Mountains dominating the training set.
+  max_rock_px_per_scene: 200000
+  nonrock_per_rock: 5.0
+
+  # Spatial blocking for honest cross-validation. 10 km decorrelates 30 m
+  # pixels while still leaving many blocks across the region.
+  block_km: 10.0
+
+# Stage 2 placeholders — these are the numbers only you can set, and they
+# drive the drilling-target ranking. Left null deliberately so the pipeline
+# fails loudly rather than inventing a threshold.
+stage2:
+  bed_product: bedmap3
+  max_drillable_ice_thickness_m: null   # realistic bedrock-recovery depth
+  max_surface_velocity_m_per_yr: null   # above this, assume signal not preserved
+  min_distance_from_iced_site_km: null  # how far from an existing constraint
+  use_bed_uncertainty: true             # mask or weight by Bedmap3 uncertainty

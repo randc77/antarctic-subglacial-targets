@@ -1,0 +1,26 @@
+name: aeml
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - numpy
+  - scipy
+  - pandas
+  - pyarrow          # parquet
+  - scikit-learn
+  - scikit-image
+  - matplotlib
+  - pyyaml
+  # geospatial - conda-forge only; pip wheels for these are a bad time
+  - rasterio
+  - geopandas
+  - shapely
+  - pyproj
+  - fiona
+  - rioxarray
+  - xarray
+  - netcdf4          # Bedmap3 / BedMachine are netCDF
+  - h5py
+  # dev
+  - pytest
+  - jupyterlab

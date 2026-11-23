@@ -1,0 +1,63 @@
+{
+  "features": [
+    "coastal",
+    "blue",
+    "green",
+    "red",
+    "nir",
+    "swir1",
+    "swir2",
+    "ndsi",
+    "ndwi",
+    "ndvi",
+    "nbr",
+    "swir1_nir",
+    "swir2_swir1",
+    "red_blue",
+    "brightness",
+    "tex_bright_std",
+    "tex_swir1_std"
+  ],
+  "true_prevalence": 0.006808248225662382,
+  "sampled_prevalence": 0.14933495563600582,
+  "n_rows": 1203228,
+  "results": {
+    "baseline": {
+      "recall": 0.7470833246990074,
+      "precision_sampled": 0.986320857955789,
+      "precision_true": 0.7379125829289703,
+      "f1_sampled": 0.8501927861429802,
+      "f1_true": 0.7424696363943312,
+      "tp": 36052,
+      "fp": 500,
+      "fn": 12205,
+      "tn": 294735
+    },
+    "random_forest": {
+      "recall": 0.9966636964585449,
+      "precision_sampled": 0.8799604808167298,
+      "precision_true": 0.22254329808610016,
+      "f1_sampled": 0.9346833278271178,
+      "f1_true": 0.3638444121220082,
+      "tp": 48096,
+      "fp": 6561,
+      "fn": 161,
+      "tn": 288674,
+      "roc_auc": 0.9974979658737695,
+      "avg_precision": 0.9760650297655269
+    },
+    "hist_gradient_boost": {
+      "recall": 0.9864682843939739,
+      "precision_sampled": 0.9043828485665977,
+      "precision_true": 0.26971644387164256,
+      "f1_sampled": 0.9436438242115488,
+      "f1_true": 0.4236108140341025,
+      "tp": 47604,
+      "fp": 5033,
+      "fn": 653,
+      "tn": 290202,
+      "roc_auc": 0.9975408072328391,
+      "avg_precision": 0.9761141183368299
+    }
+  }
+}

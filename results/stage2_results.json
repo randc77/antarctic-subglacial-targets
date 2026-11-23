@@ -1,0 +1,18 @@
+{
+  "auc": 0.9754160378357626,
+  "avg_precision": 0.8228239032324837,
+  "n_candidates": 15625,
+  "true_prevalence": 0.0016449549034240063,
+  "features": [
+    "bed_elevation",
+    "ice_thickness",
+    "surface_elevation",
+    "surface_slope_deg",
+    "bed_slope_deg",
+    "bed_relief_10km",
+    "bed_relief_50km",
+    "dist_to_water_km",
+    "surface_speed_m_yr",
+    "speed_error_m_yr"
+  ]
+}
